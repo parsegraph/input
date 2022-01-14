@@ -1,8 +1,10 @@
 import { assert } from "chai";
-import todo from "../dist/parsegraph-input";
+import Input from "../dist/parsegraph-input";
 
 describe("Package", function () {
   it("works", () => {
-    assert.equal(todo(), 42);
+    const mainCont = document.createElement("div");
+    const domCont = document.createElement("div");
+    assert.ok(new Input(mainCont, domCont, () => false));
   });
 });

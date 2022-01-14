@@ -67,6 +67,8 @@
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
     "openssl": "^1.1.0",
+    "parsegraph-matrix": "^1.4.8",
+    "parsegraph-normalizewheel": "^1.4.4",
     "parsegraph-testsuite": "^1.5.0",
     "prettier": "2.1.2",
     "raw-loader": "^4.0.1",

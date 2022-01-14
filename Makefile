@@ -1,7 +1,10 @@
 DIST_NAME = input
 
 SCRIPT_FILES = \
-	src/index.ts
+	src/index.ts \
+	src/Input.ts \
+	src/Keystroke.ts \
+	src/TouchRecord.ts
 
 all: build lint test coverage esdoc
 

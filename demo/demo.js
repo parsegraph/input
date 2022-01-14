@@ -78,7 +78,5 @@ app.use(express.static("./dist"));
 app.use(express.static("./www"));
 
 app.listen(port, () => {
-  console.log(
-    `See input build information at http://localhost:${port}`
-  );
+  console.log(`See input build information at http://localhost:${port}`);
 });
