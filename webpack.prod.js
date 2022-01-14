@@ -4,9 +4,9 @@ module.exports = {
   entry: path.resolve(__dirname, "src/index.ts"),
   output: {
     path: path.resolve(__dirname, "dist-prod"),
-    filename: "parsegraph-TODO-PACKAGE-NAME.js",
+    filename: "parsegraph-input.js",
     globalObject: "this",
-    library: "parsegraph_TODO-PACKAGE-NAME",
+    library: "parsegraph_input",
     libraryTarget: "umd",
   },
   module: {

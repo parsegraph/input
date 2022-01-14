@@ -1,4 +1,4 @@
-DIST_NAME = TODO-PACKAGE-NAME
+DIST_NAME = input
 
 SCRIPT_FILES = \
 	src/index.ts

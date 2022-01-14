@@ -52,14 +52,14 @@ app.get("/", async (req, res) => {
   write(`<!DOCTYPE html>`);
   write(`<html>`);
   write(`<head>`);
-  write(`<title>TODO-PACKAGE-NAME</title>`);
+  write(`<title>input</title>`);
   write(`</head>`);
   write(`<body>`);
   write(
-    `<h1>TODO-PACKAGE-NAME <a href='/coverage'>Coverage</a> <a href='/docs'>Docs</a></h1>`
+    `<h1>input <a href='/coverage'>Coverage</a> <a href='/docs'>Docs</a></h1>`
   );
   write(
-    `<p>This library is available as JavaScript UMD module: <a href='/parsegraph-TODO-PACKAGE-NAME.js'>parsegraph-TODO-PACKAGE-NAME.js</a></p>`
+    `<p>This library is available as JavaScript UMD module: <a href='/parsegraph-input.js'>parsegraph-input.js</a></p>`
   );
   write(`<h2>Samples &amp; Demos</h2>`);
   write(`<ul>`);
@@ -79,6 +79,6 @@ app.use(express.static("./www"));
 
 app.listen(port, () => {
   console.log(
-    `See TODO-PACKAGE-NAME build information at http://localhost:${port}`
+    `See input build information at http://localhost:${port}`
   );
 });
