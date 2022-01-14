@@ -75,6 +75,8 @@ export default class Input {
       ["keyup", this.keyupListener],
     ]);
 
+    this.domContainer().style.pointerEvents = "auto";
+
     addListeners(this.domContainer(), [
       ["DOMMouseScroll", this.onWheel],
       ["mousewheel", this.onWheel],
