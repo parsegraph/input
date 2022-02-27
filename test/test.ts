@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import Input from "../dist/parsegraph-input";
+import Input from "../src/index";
 
 describe("Package", function () {
   it("works", () => {
