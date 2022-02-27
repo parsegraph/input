@@ -149,7 +149,7 @@ export default class Input {
       spinX: e.spinX,
       spinY: e.spinY,
       pixelX: e.pixelX,
-      pixelY: e.pixelY
+      pixelY: e.pixelY,
     });
   }
 
@@ -161,12 +161,14 @@ export default class Input {
 
     this._mousedownTime = Date.now();
 
-    if (this.handleEvent("mousedown", {
-      x: this._lastMouseX,
-      y: this._lastMouseY,
-      button: event.button,
-      startTime: this._mousedownTime
-    })) {
+    if (
+      this.handleEvent("mousedown", {
+        x: this._lastMouseX,
+        y: this._lastMouseY,
+        button: event.button,
+        startTime: this._mousedownTime,
+      })
+    ) {
       event.preventDefault();
       event.stopPropagation();
       this.mainContainer().focus();
@@ -208,12 +210,14 @@ export default class Input {
       }, CLICK_DELAY_MILLIS);
     }
 
-    if (this.handleEvent("touchend", {
-      x: this._lastMouseX,
-      y: this._lastMouseY,
-      startTime: this._touchstartTime,
-      multiple: this._monitoredTouches.length != 1,
-    })) {
+    if (
+      this.handleEvent("touchend", {
+        x: this._lastMouseX,
+        y: this._lastMouseY,
+        startTime: this._touchstartTime,
+        multiple: this._monitoredTouches.length != 1,
+      })
+    ) {
       this._touchstartTime = null;
     }
   }
