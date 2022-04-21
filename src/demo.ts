@@ -1,4 +1,4 @@
-import {CLICK_DELAY_MILLIS} from ".";
+import { CLICK_DELAY_MILLIS } from ".";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("demo");
