@@ -2,7 +2,7 @@ import Keystroke, { getproperkeyname } from "./Keystroke";
 import TouchRecord from "./TouchRecord";
 
 import AbstractInput from "./AbstractInput";
-import AbstractMouseController from "./AbstractMouseController";
+import BasicMouseController from "./BasicMouseController";
 import addListeners from "./addListeners";
 import FocusInput from "./FocusInput";
 import KeyInput from "./KeyInput";
@@ -14,7 +14,7 @@ export {
   getproperkeyname,
   TouchRecord,
   AbstractInput,
-  AbstractMouseController,
+  BasicMouseController,
   addListeners,
   FocusInput,
   KeyInput,
