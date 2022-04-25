@@ -4,9 +4,9 @@ import TouchRecord from "./TouchRecord";
 import AbstractInput from "./AbstractInput";
 import BasicMouseController from "./BasicMouseController";
 import addListeners from "./addListeners";
-import FocusInput from "./FocusInput";
-import KeyInput from "./KeyInput";
-import MouseInput from "./MouseInput";
+import FocusInput, {FocusController} from "./FocusInput";
+import KeyInput, {KeyController} from "./KeyInput";
+import MouseInput, {MouseController} from "./MouseInput";
 import TouchInput from "./TouchInput";
 
 export {
@@ -17,7 +17,10 @@ export {
   BasicMouseController,
   addListeners,
   FocusInput,
+  FocusController,
   KeyInput,
+  KeyController,
   MouseInput,
+  MouseController,
   TouchInput,
 };
