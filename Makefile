@@ -3,7 +3,6 @@ DIST_NAME = input
 SCRIPT_FILES = \
 	src/TouchRecord.ts \
 	src/index.ts \
-	src/AbstractMouseController.ts \
 	src/TouchInput.ts \
 	src/MouseInput.ts \
 	src/KeyInput.ts \
@@ -11,6 +10,7 @@ SCRIPT_FILES = \
 	src/addListeners.ts \
 	src/Keystroke.ts \
 	src/AbstractInput.ts \
+	src/BasicMouseController.ts \
 	src/demo.ts \
 	test/test.ts
 
