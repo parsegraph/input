@@ -15,8 +15,28 @@ const hasShaderFiles = ()=>{
   return hasFiles("glsl");
 }
 
+const hasCSSFiles = ()=>{
+  return hasFiles("css");
+}
+
 const hasCSVFiles = ()=>{
   return hasFiles("csv") || hasFiles("tsv") || hasFiles("txt");
+}
+
+const hasPNGFiles = ()=>{
+  return hasFiles("png");
+}
+
+const hasDependency = (dep)=>{
+  const info = getPackageJSON();
+  return (info.peerDependencies && info.peerDependencies[dep]) ||
+    (info.dependencies && info.dependencies[dep]) ||
+    (info.devDependencies && info.devDependencies[dep]) ||
+    (info.optionalDependencies && info.optionalDependencies[dep]);
+}
+
+const hasReact = ()=>{
+  return hasDependency("react") || hasDependency("react-dom");
 }
 
 const recognizedExternals = {
@@ -25,6 +45,12 @@ const recognizedExternals = {
     commonjs2:"react",
     amd:"react",
     root:"React"
+  },
+  "react-dom":{
+    commonjs:"react-dom",
+    commonjs2:"react-dom",
+    amd:"react-dom",
+    root:"ReactDOM"
   },
   "parsegraph-log":{
     commonjs:"parsegraph-log",
@@ -91,6 +117,19 @@ const webpackConfig = (prod)=>{
     extensions.push(".tsv");
     extensions.push(".txt");
     extensions.push(".csv");
+  }
+  if (hasCSSFiles()) {
+    rules.push({
+      test: /\.(css)$/,
+      use: hasReact() ? ["style-loader", "css-loader"] : ["raw-loader"],
+    });
+    extensions.push(".css");
+  }
+  if (hasPNGFiles()) {
+    rules.push({
+      test: /\.png/,
+      type: "asset/inline"
+    });
   }
 
   return {
