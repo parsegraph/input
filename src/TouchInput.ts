@@ -1,4 +1,4 @@
-import TouchRecord from './TouchRecord';
+import TouchRecord from "./TouchRecord";
 import addListeners from "./addListeners";
 import { midPoint } from "parsegraph-matrix";
 import AbstractInput from "./AbstractInput";
