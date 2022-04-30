@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/parsegraph/input#readme",
   "dependencies": {
-    "parsegraph-matrix": "^1.4.11",
+    "parsegraph-matrix": "^1.4.12",
     "parsegraph-normalizewheel": "^1.4.7"
   },
   "devDependencies": {
