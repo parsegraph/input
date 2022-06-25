@@ -1,11 +1,11 @@
-import BasicMouseController from "./BasicMouseController"
+import BasicMouseController from "./BasicMouseController";
 import TouchInput from "./TouchInput";
 import MouseInput from "./MouseInput";
 
 class DemoMouseController extends BasicMouseController {
-  _cb: (...args: any[])=>void;
+  _cb: (...args: any[]) => void;
 
-  constructor(cb: (...args:any[])=>void) {
+  constructor(cb: (...args: any[]) => void) {
     super();
     this._cb = cb;
   }
