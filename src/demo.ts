@@ -43,8 +43,8 @@ class DemoMouseController extends BasicMouseController {
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("demo");
 
-  const control = new DemoMouseController((...args: any[])=>{
-    console.log(...args);
+  const control = new DemoMouseController((...args: any[]) => {
+    root.innerHTML = args.join(" ") + "<br/>" + root.innerHTML;
   });
 
   const touchInput = new TouchInput();
