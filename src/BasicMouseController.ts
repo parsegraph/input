@@ -7,7 +7,7 @@ export default class BasicMouseController implements MouseController {
 
   constructor() {
     this._focused = false;
-    this.setLastMouseCoords(0, 0);
+    this.setLastMouseCoords(NaN, NaN);
   }
 
   setLastMouseCoords(x: number, y: number) {
@@ -23,11 +23,15 @@ export default class BasicMouseController implements MouseController {
     return this._lastMouseY;
   }
 
+  hasLastMouse() {
+    return !isNaN(this.lastMouseX()) || !isNaN(this.lastMouseY())
+  }
+
   mousemove(x: number, y: number) {
     this.setLastMouseCoords(x, y);
   }
 
-  wheel(_: number): boolean {
+  wheel(_: number, x:number, y:number): boolean {
     return false;
   }
 
@@ -35,7 +39,10 @@ export default class BasicMouseController implements MouseController {
     return true;
   }
 
-  mouseup(_: any) {}
+  mouseup(button: any) {
+    this._lastMouseX = NaN;
+    this._lastMouseY = NaN;
+  }
 
   blur() {
     this._focused = false;

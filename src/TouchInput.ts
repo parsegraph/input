@@ -5,6 +5,8 @@ import AbstractInput from "./AbstractInput";
 import fuzzyEquals from "parsegraph-fuzzyequals";
 import { MouseController } from "./MouseInput";
 
+const WHEEL_GRANULARITY = 1;
+
 export default class TouchInput extends AbstractInput<MouseController> {
   _monitoredTouches: TouchRecord[];
   _touchstartTime: number;
@@ -27,29 +29,34 @@ export default class TouchInput extends AbstractInput<MouseController> {
     ]);
   }
 
-  numActiveTouches() {
-    let realMonitoredTouches = 0;
-    this._monitoredTouches.forEach(function (touchRec) {
-      if (touchRec.touchstart) {
-        realMonitoredTouches++;
-      }
-    }, this);
-    return realMonitoredTouches;
-  }
-
-  removeTouchListener(event: TouchEvent) {
-    // console.log("touchend");
+  touchstartListener(event: TouchEvent) {
+    event.preventDefault();
+    this.control().focus();
+    if (this._touchendTimeout) {
+      clearTimeout(this._touchendTimeout);
+      this._touchendTimeout = null;
+    }
     for (let i = 0; i < event.changedTouches.length; ++i) {
       const touch = event.changedTouches[i];
-      this.removeTouchByIdentifier(touch.identifier);
+      const touchX = touch.pageX;
+      const touchY = touch.pageY;
+      const touchRec = new TouchRecord(
+        touch.identifier,
+        touchX,
+        touchY,
+        touchX,
+        touchY
+      );
+      this._monitoredTouches.push(touchRec);
+      this.control().mousedown(touchX, touchY);
+
+      touchRec.touchstart = Date.now();
+      this._touchstartTime = Date.now();
     }
 
-    if (this.numActiveTouches() > 0) {
-      return;
+    if (this.numActiveTouches() > 1) {
+      this._touchstartTime = null;
     }
-    this.control().mousedown(0, this._touchstartTime);
-    this.control().mouseup(0);
-    this._touchstartTime = null;
   }
 
   touchmoveListener(event: TouchEvent) {
@@ -74,7 +81,9 @@ export default class TouchInput extends AbstractInput<MouseController> {
       });*/
       touchRecord.x = touchX;
       touchRecord.y = touchY;
-      this.control().mousemove(touchX, touchY);
+      if (this.numActiveTouches() === 1) {
+        this.control().mousemove(touchX, touchY);
+      }
     }
 
     if (this.numActiveTouches() > 1) {
@@ -89,42 +98,35 @@ export default class TouchInput extends AbstractInput<MouseController> {
         Math.pow(this._monitoredTouches[1].x - this._monitoredTouches[0].x, 2) +
           Math.pow(this._monitoredTouches[1].y - this._monitoredTouches[0].y, 2)
       );
-      if (isNaN(this._zoomSize) || !fuzzyEquals(zoomSize, this._zoomSize, 40)) {
-        this.control().mousemove(zoomCenter[0], zoomCenter[1]);
-        this.control().wheel(this._zoomSize > zoomSize ? 1 : -1);
+      if (isNaN(this._zoomSize) || !fuzzyEquals(zoomSize, this._zoomSize, WHEEL_GRANULARITY)) {
+        this.control().wheel(this._zoomSize > zoomSize ? WHEEL_GRANULARITY : -WHEEL_GRANULARITY, zoomCenter[0], zoomCenter[1])
         this._zoomSize = zoomSize;
       }
     }
   }
 
-  touchstartListener(event: TouchEvent) {
-    event.preventDefault();
-    this.control().focus();
-    if (this._touchendTimeout) {
-      clearTimeout(this._touchendTimeout);
-      this._touchendTimeout = null;
-    }
+  removeTouchListener(event: TouchEvent) {
+    // console.log("touchend");
     for (let i = 0; i < event.changedTouches.length; ++i) {
       const touch = event.changedTouches[i];
-      const touchX = touch.pageX;
-      const touchY = touch.pageY;
-      const touchRec = new TouchRecord(
-        touch.identifier,
-        touchX,
-        touchY,
-        touchX,
-        touchY
-      );
-      this._monitoredTouches.push(touchRec);
-      this.control().mousemove(touchX, touchY);
-
-      touchRec.touchstart = Date.now();
-      this._touchstartTime = Date.now();
+      this.removeTouchByIdentifier(touch.identifier);
     }
 
-    if (this.numActiveTouches() > 1) {
-      this._touchstartTime = null;
+    if (this.numActiveTouches() > 0) {
+      return;
     }
+    this.control().mouseup(0);
+    this._touchstartTime = null;
+  }
+
+  numActiveTouches() {
+    let realMonitoredTouches = 0;
+    this._monitoredTouches.forEach(function (touchRec) {
+      if (touchRec.touchstart) {
+        realMonitoredTouches++;
+      }
+    }, this);
+    return realMonitoredTouches;
   }
 
   getTouchByIdentifier(identifier: number): TouchRecord {

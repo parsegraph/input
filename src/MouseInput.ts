@@ -4,7 +4,7 @@ import AbstractInput from "./AbstractInput";
 import { FocusController } from "./FocusInput";
 
 export interface MouseController extends FocusController {
-  wheel(mag: number): void;
+  wheel(mag: number, x: number, y: number): void;
   mousemove(x: number, y: number): void;
   mousedown(button: any, downStart: number): boolean;
   mouseup(button: any): void;
@@ -33,10 +33,13 @@ export default class MouseInput extends AbstractInput<MouseController> {
   onWheel(event: WheelEvent) {
     event.preventDefault();
 
+    const x = event.offsetX;
+    const y = event.offsetY;
+
     // console.log("Wheel event", wheel);
     const e = normalizeWheel(event);
     if (this.control()) {
-      this.control().wheel(e.spinY);
+      this.control().wheel(e.spinY, x, y);
     }
   }
 
