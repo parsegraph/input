@@ -48,7 +48,7 @@ export default class TouchInput extends AbstractInput<MouseController> {
         touchY
       );
       this._monitoredTouches.push(touchRec);
-      this.control().mousedown(touchX, touchY);
+      this.control().mousedown(touch.identifier, Date.now(), touchX, touchY);
 
       touchRec.touchstart = Date.now();
       this._touchstartTime = Date.now();
@@ -98,8 +98,15 @@ export default class TouchInput extends AbstractInput<MouseController> {
         Math.pow(this._monitoredTouches[1].x - this._monitoredTouches[0].x, 2) +
           Math.pow(this._monitoredTouches[1].y - this._monitoredTouches[0].y, 2)
       );
-      if (isNaN(this._zoomSize) || !fuzzyEquals(zoomSize, this._zoomSize, WHEEL_GRANULARITY)) {
-        this.control().wheel(this._zoomSize > zoomSize ? WHEEL_GRANULARITY : -WHEEL_GRANULARITY, zoomCenter[0], zoomCenter[1])
+      if (
+        isNaN(this._zoomSize) ||
+        !fuzzyEquals(zoomSize, this._zoomSize, WHEEL_GRANULARITY)
+      ) {
+        this.control().wheel(
+          this._zoomSize > zoomSize ? WHEEL_GRANULARITY : -WHEEL_GRANULARITY,
+          zoomCenter[0],
+          zoomCenter[1]
+        );
         this._zoomSize = zoomSize;
       }
     }
@@ -109,13 +116,13 @@ export default class TouchInput extends AbstractInput<MouseController> {
     // console.log("touchend");
     for (let i = 0; i < event.changedTouches.length; ++i) {
       const touch = event.changedTouches[i];
-      this.removeTouchByIdentifier(touch.identifier);
+      const removedTouch = this.removeTouchByIdentifier(touch.identifier);
+      this.control().mouseup(touch.identifier, Date.now(), removedTouch.x, removedTouch.y);
     }
 
     if (this.numActiveTouches() > 0) {
       return;
     }
-    this.control().mouseup(0);
     this._touchstartTime = null;
   }
 

@@ -20,9 +20,9 @@ class DemoMouseController extends BasicMouseController {
     return false;
   }
 
-  mousedown(x: number, y: number): boolean {
-    super.mousedown(x, y);
-    this.log("Mousedown");
+  mousedown(button: any, downStart: number, x: number, y: number): boolean {
+    super.mousedown(button, downStart, x, y);
+    this.log("Mousedown", button, downStart, x, y);
     return true;
   }
 
@@ -34,9 +34,9 @@ class DemoMouseController extends BasicMouseController {
     return true;
   }
 
-  mouseup(button: any) {
-    this.log("Mouseup", button);
-    super.mouseup(button);
+  mouseup(button: any, downEnd: number, x: number, y:number) {
+    this.log("Mouseup", button, downEnd, x, y);
+    super.mouseup(button, downEnd, x, y);
   }
 }
 

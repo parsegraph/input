@@ -35,7 +35,8 @@ export default class BasicMouseController implements MouseController {
     return false;
   }
 
-  mousedown(_: any, _2: number): boolean {
+  mousedown(button: any, downStart: number, x: number, y: number): boolean {
+    this.setLastMouseCoords(x, y);
     return true;
   }
 
@@ -43,7 +44,7 @@ export default class BasicMouseController implements MouseController {
     this.setLastMouseCoords(NaN, NaN);
   }
 
-  mouseup(button: any) {
+  mouseup(button: any, downEnd: number, x: number, y: number) {
     this.clearLastMouseCoords();
   }
 

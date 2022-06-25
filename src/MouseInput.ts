@@ -6,8 +6,8 @@ import { FocusController } from "./FocusInput";
 export interface MouseController extends FocusController {
   wheel(mag: number, x: number, y: number): void;
   mousemove(x: number, y: number): void;
-  mousedown(button: any, downStart: number): boolean;
-  mouseup(button: any): void;
+  mousedown(button: any, downStart: number, x: number, y: number): boolean;
+  mouseup(button: any, downEnd: number, x: number, y: number): void;
   lastMouseX(): number;
   lastMouseY(): number;
 }
@@ -48,11 +48,11 @@ export default class MouseInput extends AbstractInput<MouseController> {
   }
 
   mouseupListener(event: MouseEvent) {
-    this.control().mouseup(event.button);
+    this.control().mouseup(event.button, Date.now(), event.offsetX, event.offsetY);
   }
 
   mousedownListener(event: MouseEvent) {
-    if (this.control().mousedown(event.button, Date.now())) {
+    if (this.control().mousedown(event.button, Date.now(), event.offsetX, event.offsetY)) {
       event.preventDefault();
       event.stopPropagation();
       this.container().focus();
