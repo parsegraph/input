@@ -20,8 +20,7 @@ export default class MouseInput extends AbstractInput<MouseController> {
       ["mousewheel", this.onWheel],
       ["mousedown", this.mousedownListener],
       ["mousemove", this.mousemoveListener],
-      ["mouseup", this.mouseupListener],
-      ["mouseout", this.mouseupListener],
+      ["mouseup", this.mouseupListener]
     ]);
   }
 
