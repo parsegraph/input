@@ -15,9 +15,9 @@
   },
   "homepage": "https://github.com/parsegraph/input#readme",
   "dependencies": {
-    "parsegraph-fuzzyequals": "^1.4.11",
-    "parsegraph-matrix": "^1.4.14",
-    "parsegraph-normalizewheel": "^1.4.8"
+    "parsegraph-fuzzyequals": "^1.4.12",
+    "parsegraph-matrix": "^1.4.15",
+    "parsegraph-normalizewheel": "^1.4.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
