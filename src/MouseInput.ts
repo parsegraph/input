@@ -21,7 +21,7 @@ export default class MouseInput extends AbstractInput<MouseController> {
       ["mousewheel", this.onWheel],
       ["mousedown", this.mousedownListener],
       ["mousemove", this.mousemoveListener],
-      ["mouseup", this.mouseupListener]
+      ["mouseup", this.mouseupListener],
     ]);
   }
 
@@ -48,11 +48,23 @@ export default class MouseInput extends AbstractInput<MouseController> {
   }
 
   mouseupListener(event: MouseEvent) {
-    this.control().mouseup(event.button, Date.now(), event.offsetX, event.offsetY);
+    this.control().mouseup(
+      event.button,
+      Date.now(),
+      event.offsetX,
+      event.offsetY
+    );
   }
 
   mousedownListener(event: MouseEvent) {
-    if (this.control().mousedown(event.button, Date.now(), event.offsetX, event.offsetY)) {
+    if (
+      this.control().mousedown(
+        event.button,
+        Date.now(),
+        event.offsetX,
+        event.offsetY
+      )
+    ) {
       event.preventDefault();
       event.stopPropagation();
       this.container().focus();

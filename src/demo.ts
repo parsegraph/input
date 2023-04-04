@@ -34,7 +34,7 @@ class DemoMouseController extends BasicMouseController {
     return true;
   }
 
-  mouseup(button: any, downEnd: number, x: number, y:number) {
+  mouseup(button: any, downEnd: number, x: number, y: number) {
     this.log("Mouseup", button, downEnd, x, y);
     return super.mouseup(button, downEnd, x, y);
   }

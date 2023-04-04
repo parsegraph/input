@@ -117,7 +117,12 @@ export default class TouchInput extends AbstractInput<MouseController> {
     for (let i = 0; i < event.changedTouches.length; ++i) {
       const touch = event.changedTouches[i];
       const removedTouch = this.removeTouchByIdentifier(touch.identifier);
-      this.control().mouseup(touch.identifier, Date.now(), removedTouch.x, removedTouch.y);
+      this.control().mouseup(
+        touch.identifier,
+        Date.now(),
+        removedTouch.x,
+        removedTouch.y
+      );
     }
 
     if (this.numActiveTouches() > 0) {
