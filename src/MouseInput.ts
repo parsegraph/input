@@ -4,12 +4,13 @@ import AbstractInput from "./AbstractInput";
 import { FocusController } from "./FocusInput";
 
 export interface MouseController extends FocusController {
-  wheel(mag: number, x: number, y: number): void;
-  mousemove(x: number, y: number): void;
+  wheel(mag: number, x: number, y: number): boolean;
+  mousemove(x: number, y: number): boolean;
   mousedown(button: any, downStart: number, x: number, y: number): boolean;
-  mouseup(button: any, downEnd: number, x: number, y: number): void;
+  mouseup(button: any, downEnd: number, x: number, y: number): boolean;
   lastMouseX(): number;
   lastMouseY(): number;
+  update(t: Date): boolean;
 }
 
 export default class MouseInput extends AbstractInput<MouseController> {

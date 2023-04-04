@@ -29,6 +29,7 @@ export default class BasicMouseController implements MouseController {
 
   mousemove(x: number, y: number) {
     this.setLastMouseCoords(x, y);
+    return true;
   }
 
   wheel(_mag: number, _x: number, _y: number): boolean {
@@ -46,6 +47,7 @@ export default class BasicMouseController implements MouseController {
 
   mouseup(_button: any, _downEnd: number, _x: number, _y: number) {
     this.clearLastMouseCoords();
+    return true;
   }
 
   blur() {
@@ -58,5 +60,9 @@ export default class BasicMouseController implements MouseController {
 
   focused() {
     return this._focused;
+  }
+
+  update(_t: Date) {
+    return false;
   }
 }

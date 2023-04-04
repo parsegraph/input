@@ -7,6 +7,7 @@ export interface KeyController {
   keyup(event: Keystroke): void;
   lastMouseX(): number;
   lastMouseY(): number;
+  update(t: Date): boolean;
 }
 
 export default class KeyInput extends AbstractInput<KeyController> {
