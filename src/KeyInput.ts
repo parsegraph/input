@@ -4,7 +4,7 @@ import addListeners from "./addListeners";
 
 export interface KeyController {
   keydown(event: Keystroke): boolean;
-  keyup(event: Keystroke): void;
+  keyup(event: Keystroke): boolean;
   lastMouseX(): number;
   lastMouseY(): number;
   update(t: Date): boolean;
