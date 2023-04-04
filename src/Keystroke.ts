@@ -28,7 +28,6 @@ const mappedKeyNames: { [id: string]: string } = {
 };
 
 export function getproperkeyname(keyName: string, keyCode: string) {
-  console.log(keyName + " " + keyCode);
   if (directKeyNames.indexOf(keyName) >= 0) {
     return keyName;
   }
