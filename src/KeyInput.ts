@@ -5,8 +5,6 @@ import addListeners from "./addListeners";
 export interface KeyController {
   keydown(event: Keystroke): boolean;
   keyup(event: Keystroke): boolean;
-  lastMouseX(): number;
-  lastMouseY(): number;
   tick(cycleStart: number): boolean;
 }
 
