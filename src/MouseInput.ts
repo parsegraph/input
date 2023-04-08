@@ -10,7 +10,7 @@ export interface MouseController extends FocusController {
   mouseup(button: any, downEnd: number, x: number, y: number): boolean;
   lastMouseX(): number;
   lastMouseY(): number;
-  update(t: Date): boolean;
+  tick(cycleStart: number): boolean;
 }
 
 export default class MouseInput extends AbstractInput<MouseController> {

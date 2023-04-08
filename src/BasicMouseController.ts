@@ -62,7 +62,7 @@ export default class BasicMouseController implements MouseController {
     return this._focused;
   }
 
-  update(_t: Date) {
+  tick(_cycleStart: number) {
     return false;
   }
 }
